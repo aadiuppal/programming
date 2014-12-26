@@ -1,10 +1,10 @@
 #include<stdio.h>
 
+
 struct node{
 	int data;
 	struct node *next;
 };
-
 
 struct node*  newnode(){
 	return (struct node *)malloc(sizeof(struct node));
@@ -57,7 +57,7 @@ void push(struct node **head,int data){
 }
 
 
-struct node* delete_node(struct node **head,int data_del){
+void delete_node(struct node **head,int data_del){
 	struct node *trav=*head;
 	struct node *temp;
 //	if (*head == NULL){
@@ -75,7 +75,7 @@ struct node* delete_node(struct node **head,int data_del){
 		*head=trav->next;
 		free(trav);
 	}
-	return *head;
+//	return *head;
 }
 
 struct node* pop(struct node **head){
@@ -185,7 +185,7 @@ printf("\nloop::%d\n",detectloop(&head));
 //looptohead(&head);
 
 
-//printf("\nloop::%d\n",detectloop(&head));
+printf("\nloop::%d\n",detectloop(&head));
 //print_circular_list(&head);
   // Insert 4 at the end. So linked list becomes 1->7->6->4->NULL
   //append(&head, 4);
@@ -197,24 +197,24 @@ printf("\nloop::%d\n",detectloop(&head));
   push(&head,321);
   printf("\n Created Linked list is: ");
   print_list(head);
-  head=  delete_node(&head,6);
+  delete_node(&head,81);
   printf("\n Created Linked list is: ");
   print_list(head);
-  head= delete_node(&head,123);
-  printf("\n Created Linked list is: ");
-  print_list(head);
-  pop(&head);
+  delete_node(&head,123);
   printf("\n Created Linked list is: ");
   print_list(head);
   pop(&head);
   printf("\n Created Linked list is: ");
   print_list(head);
-enqueue(&head,72);
-dequeue(&head);
+  pop(&head);
   printf("\n Created Linked list is: ");
   print_list(head);
-printf("\nloop::%d\n",detectloop(&head));
-print_nth(&head,4);
+  enqueue(&head,72);
+  dequeue(&head);
+  printf("\n Created Linked list is: ");
+  print_list(head);
+  printf("\nloop::%d\n",detectloop(&head));
+print_nth(&head,3);
 getchar();
   return 0;
 }
