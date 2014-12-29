@@ -114,8 +114,24 @@ struct node * delete(struct node *root, int data){
 	return root;
 }
 
+int isBST(struct node *root){
+	static struct node *prev = NULL;
+	if(root == NULL){
+	return 1;
+	}
 
-
+	if (!isBST(root->left)){
+		return 0;
+	}
+	if (prev!=NULL && prev->data < root->data){
+		return 0;
+	}
+	prev=root;
+	if (!isBST(root->right)){
+		return 0;
+	}
+	return 1;
+}
 
 int main(){
     struct node *root = NULL;
