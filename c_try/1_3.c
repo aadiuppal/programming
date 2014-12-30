@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 
 void swap(char *str1,char *str2){
 	char t=*str1;
@@ -31,8 +32,12 @@ void qsort(char str[],int s, int e){
 
 int is_permute(char *str1,char *str2){
 	int i;
-	qsort(str1,0,5);
-	qsort(str2,0,5);
+//	printf(">%d<::<%d>\n",strlen(str1),strlen(str2));
+	if (strlen(str1) != strlen(str2)){
+		return 0;
+	}
+	qsort(str1,0,strlen(str1));
+	qsort(str2,0,strlen(str2));
 	for(i=0;i<5;i++){
 		if (str1[i] != str2[i]){
 			return 0;
@@ -44,7 +49,7 @@ int is_permute(char *str1,char *str2){
 int main(){
 	char str1[]="qweas";
 	char str2[]="wqaes";
-	char str3[]="aaass";
+	char str3[]="aias";
 	printf("<:%s<:%s<:%s\n",str1,str2,str3);
 	printf("<:%d<:%d<:%d\n",is_permute(str1,str2),is_permute(str2,str3),is_permute(str3,str1));
 }
