@@ -74,7 +74,8 @@ url="http://sec.tamu.edu/students/careerfair/Search.aspx?fastOps=0"
 page=urllib2.urlopen(url)
 content=page.read()
 #print content
-soup=BeautifulSoup(content)
+soup=BeautifulSoup(content,'html5lib')
+#print soup
 writer1 = csv.writer(open("comp"+".csv", 'wb'))
 for entry in soup.find_all('td'):
 	s=BeautifulSoup(str(entry))
@@ -85,7 +86,7 @@ for entry in soup.find_all('td'):
 	st=0
 	this=0
 	if s.a:
-		print s.a.contents[0]
+		#print s.a.contents[0]
 		if str(s.a.contents[0]) != "?":
 			comp=s.a.contents[0]
 		count =0
@@ -93,19 +94,21 @@ for entry in soup.find_all('td'):
 		#print days
 		#days=[]
 		if str(s.a.contents[0]) =="?":
-			print days
+			#print days
 			days.insert(0,comp)
 	                writer1.writerow(days)
 			days=[]
 			st =1
 	if parser.feed(str(s)):
-		print "<<<<<<<<<<<<<<<<<<"
+		#print "<<<<<<<<<<<<<<<<<<"
 		#print str(s)
-		print "###########"
-		print parser.feed(str(s))
-		print ">>>>>>>>>>>>>>>>>"
+		#print "###########"
+		parser.feed(str(s))
+		#print ">>>>>>>>>>>>>>>>>"
 	elif this==0 and st==0:
-		print "!!!!!!!!!!!!!!"
+		#print "!!!!!!!!!!!!!!"
 		#print str(s)
-		print "@@@@@@@@@@@@@"
+		#print "@@@@@@@@@@@@@"
 		count =count +1
+
+#print sys.getsizeof(soup)
