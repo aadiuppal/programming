@@ -8,7 +8,7 @@ from random import randint
 import time
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
-
+import csv
 
 count=0
 exit=0
@@ -75,7 +75,7 @@ page=urllib2.urlopen(url)
 content=page.read()
 #print content
 soup=BeautifulSoup(content)
-
+writer1 = csv.writer(open("comp"+".csv", 'wb'))
 for entry in soup.find_all('td'):
 	s=BeautifulSoup(str(entry))
 	#print s
@@ -86,11 +86,17 @@ for entry in soup.find_all('td'):
 	this=0
 	if s.a:
 		print s.a.contents[0]
+		if str(s.a.contents[0]) != "?":
+			comp=s.a.contents[0]
 		count =0
 		this=1
 		#print days
-		days=[]
-		if str(s.a.contents) =="?":
+		#days=[]
+		if str(s.a.contents[0]) =="?":
+			print days
+			days.insert(0,comp)
+	                writer1.writerow(days)
+			days=[]
 			st =1
 	if parser.feed(str(s)):
 		print "<<<<<<<<<<<<<<<<<<"
@@ -103,5 +109,3 @@ for entry in soup.find_all('td'):
 		#print str(s)
 		print "@@@@@@@@@@@@@"
 		count =count +1
-	
-
