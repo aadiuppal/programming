@@ -24,26 +24,30 @@ class MyHTMLParser(HTMLParser):
 	    exit=0
 	    for i in attr:
 		if i == "checked" and count ==0:
-			print "tue"
+			#print "tue"
 			days.append("tuesday")
 			count=1
 			exit=1
 			st=1
 		elif i == "checked" and count ==1 and exit==0:
-			print "wed"
+			#print "wed"
+			days.append("wednesday")
 			count=2
 			exit=1
 			st=1
 		elif i == "checked" and count ==2 and exit==0:
-			print "golf"
+			#print "golf"
+			days.append("golf")
 			count=3
 			exit=1
 			st=1
 		elif i == "checked" and count ==3 and exit==0:
-			print "dinner"
+			#print "dinner"
+			days.append("dinner")
 			count=4
 			exit=1
 			st=1
+	   # print days
            # print "     attr:", attr
     #def handle_endtag(self, tag):
       # print "End tag  :", tag
@@ -84,6 +88,7 @@ for entry in soup.find_all('td'):
 		print s.a.contents[0]
 		count =0
 		this=1
+		#print days
 		days=[]
 		if str(s.a.contents) =="?":
 			st =1
