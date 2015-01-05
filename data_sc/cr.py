@@ -9,7 +9,9 @@ import time
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
 import csv
+from selenium import webdriver
 
+"""
 count=0
 exit=0
 days=[]
@@ -66,11 +68,29 @@ class MyHTMLParser(HTMLParser):
         #print "Num ent  :", c
     #def handle_decl(self, data):
         #print "Decl     :", data
-
+####################  HTML Parser class ends here #################
 
 parser=MyHTMLParser()
+"""
+
 
 url="http://sec.tamu.edu/students/careerfair/Search.aspx?fastOps=0"
+###############     THE URL ######################
+
+
+driver =webdriver.Chrome()
+driver.get(url)
+print driver
+#doc=get
+
+
+
+
+
+
+
+###################  CSV generation  after reading web page ############################
+"""
 page=urllib2.urlopen(url)
 content=page.read()
 #print content
@@ -112,3 +132,5 @@ for entry in soup.find_all('td'):
 		count =count +1
 
 #print sys.getsizeof(soup)
+
+"""
