@@ -28,25 +28,29 @@ class MyHTMLParser(HTMLParser):
 	    for i in attr:
 		if i == "checked" and count ==0:
 			#print "tue"
-			days.append("tuesday")
+			#days.append("tuesday")
+			days.append("yes")
 			count=1
 			exit=1
 			st=1
 		elif i == "checked" and count ==1 and exit==0:
 			#print "wed"
-			days.append("wednesday")
+			#days.append("wednesday")
+			days.append("yes")
 			count=2
 			exit=1
 			st=1
 		elif i == "checked" and count ==2 and exit==0:
 			#print "golf"
-			days.append("golf")
+			#days.append("golf")
+			days.append("yes")
 			count=3
 			exit=1
 			st=1
 		elif i == "checked" and count ==3 and exit==0:
 			#print "dinner"
-			days.append("dinner")
+			#days.append("dinner")
+			days.append("yes")
 			count=4
 			exit=1
 			st=1
@@ -122,6 +126,7 @@ content=response.read()
 soup=BeautifulSoup(content,'html5lib')
 #print soup
 writer1 = csv.writer(open("comp"+".csv", 'wb'))
+writer1.writerow(["Companies","Tuesday","Wednesday","Golf","Dinner"])
 for entry in soup.find_all('td'):
 	s=BeautifulSoup(str(entry))
 	#print s
@@ -154,6 +159,7 @@ for entry in soup.find_all('td'):
 		#print "!!!!!!!!!!!!!!"
 		#print str(s)
 		#print "@@@@@@@@@@@@@"
+		days.append("no")
 		count =count +1
 
 #print sys.getsizeof(soup)
