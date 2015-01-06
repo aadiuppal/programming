@@ -2,16 +2,16 @@
 #include<string.h>
 
 char * short_str(char *str){
-	int count;
+	int count1,count2;
 	char *str_new=(char *)malloc(2*strlen(str)*sizeof(char));
 	char c;
 	int i,j,k=0;
 	for(i=0;i<strlen(str);i++){
 		c=str[i];
-		count=0;
+		count1=0;
 		for(j=i;j<strlen(str);j++){
 			if(str[j]==c){
-				count++;
+				count1++;
 			}
 			else{
 				break;
@@ -20,15 +20,32 @@ char * short_str(char *str){
 		}
 		str_new[k]=c;
 		k++;
-		count=count+(int)'0';
-		str_new[k]=count;
-		k++;
+		if (count1 > 9){
+			count2=count1%10;
+			count1=count1/10;
+			count1=count1+(int)'0';
+			str_new[k]=count1;
+			k++;
+			count2=count2+(int)'0';
+			str_new[k]=count2;
+			k++;
+		}
+		else{
+			count1=count1+(int)'0';
+			str_new[k]=count1;
+			k++;
+		}
 	}
-	return str_new;
+	if (strlen(str_new)<strlen(str)){
+		return str_new;
+	}
+	else{
+		return str;
+	}
 }
 
 int main(){
-	char str[]="aaabbb";
+	char str[]="aaaaaaaaaaaaaaaaaaaaabc";
 	char *str1;
 	printf("::%s::\n",str);
 	str1=short_str(str);
