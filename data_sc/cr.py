@@ -10,8 +10,9 @@ from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
 import csv
 from selenium import webdriver
+import mechanize
 
-"""
+#"""
 count=0
 exit=0
 days=[]
@@ -71,28 +72,52 @@ class MyHTMLParser(HTMLParser):
 ####################  HTML Parser class ends here #################
 
 parser=MyHTMLParser()
-"""
+#"""
 
 
 url="http://sec.tamu.edu/students/careerfair/Search.aspx?fastOps=0"
 ###############     THE URL ######################
 
 
-driver =webdriver.Chrome()
-driver.get(url)
-print driver
-#doc=get
-
-
-
-
-
+br=mechanize.Browser()
+#br.set_all_readonly(False)    # allow everything to be written to
+br.set_handle_robots(False)   # ignore robots
+br.set_handle_refresh(False) 
+response = br.open(url)
+#print response.read()      # the text of the page
+response1 = br.response()  # get the response again
+#print response1.read()
+#for form in br.forms():
+    #print "Form name:", form.name
+    #print form
+br.select_form("aspnetForm") 
+#for control in br.form.controls:
+    #print control
+    #print "type=%s, name=%s value=%s" % (control.type, control.name, br[control.name])
+day_control = br.form.find_control("ctl00$ctl00$ctl00$MasterMain$Content$Content$ddlDays")
+maj_control = br.form.find_control("ctl00$ctl00$ctl00$MasterMain$Content$Content$ddlMajor")
+deg_control = br.form.find_control("ctl00$ctl00$ctl00$MasterMain$Content$Content$ddlDegree")
+emp_control = br.form.find_control("ctl00$ctl00$ctl00$MasterMain$Content$Content$ddlEmployment")
+#if deg_control.type == "select":  # means it's class ClientForm.SelectControl
+    #for item in deg_control.items:
+    	#print " name=%s values=%s" % (item.name, str([label.text  for label in item.get_labels()]))
+#print control.value
+#print control  # selected value is starred
+day_control.value = ["A"]
+maj_control.value = ["7"]   ##7=computer engg     8= computer science     9=electrical engg
+deg_control.value = ["M"]  ##M=masters
+emp_control.value = ["IC"] ##IC=intern /co-op
+#print control
+#br[control.name] = ["Tuesday"]  # equivalent and more normal
+response = br.submit()
+#print response.read()
+content=response.read()
 
 
 ###################  CSV generation  after reading web page ############################
-"""
-page=urllib2.urlopen(url)
-content=page.read()
+#"""
+#page=urllib2.urlopen(url)
+#content=page.read()
 #print content
 soup=BeautifulSoup(content,'html5lib')
 #print soup
@@ -133,4 +158,4 @@ for entry in soup.find_all('td'):
 
 #print sys.getsizeof(soup)
 
-"""
+#"""
