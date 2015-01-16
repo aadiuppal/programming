@@ -16,10 +16,10 @@ import mechanize
 count=0
 exit=0
 days=[]
-tues=[]
-wed=[]
-golf=[]
-dinner=[]
+#tues=[]
+#wed=[]
+#golf=[]
+#dinner=[]
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -37,28 +37,28 @@ class MyHTMLParser(HTMLParser):
 		if i == "checked" and count ==0:
 			#print "tue"
 			#days.append("tuesday")
-			tues.append("1")
+			tues=1
 			count=1
 			exit=1
 			st=1
 		elif i == "checked" and count ==1 and exit==0:
 			#print "wed"
 			#days.append("wednesday")
-			wed.append("1")
+			wed=1
 			count=2
 			exit=1
 			st=1
 		elif i == "checked" and count ==2 and exit==0:
 			#print "golf"
 			#days.append("golf")
-			golf.append("1")
+			golf=1
 			count=3
 			exit=1
 			st=1
 		elif i == "checked" and count ==3 and exit==0:
 			#print "dinner"
 			#days.append("dinner")
-			dinner.append("1")
+			dinner=1
 			count=4
 			exit=1
 			st=1
@@ -162,6 +162,10 @@ for entry in soup.find_all('td'):
 			days.insert(4,dinner)
 	                writer1.writerow(days)
 			days=[]
+			tues=[]
+			wed=[]
+			golf=[]
+			dinner=[]
 			st =1
 	if parser.feed(str(s)):
 		#print "<<<<<<<<<<<<<<<<<<"
@@ -176,13 +180,13 @@ for entry in soup.find_all('td'):
 		#days.append("no")
 		count =count +1
 		if count==1:
-			tues.append('0')
+			tues=0
 		elif count==2:
-			wed.append('0')
+			wed=0
 		elif count==3:
-			golf.append('0')
+			golf=0
 		elif count==4:
-			dinner.append('0')
+			dinner=0
 #print sys.getsizeof(soup)
 print ccc
 #"""
