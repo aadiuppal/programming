@@ -16,6 +16,10 @@ import mechanize
 count=0
 exit=0
 days=[]
+tues=[]
+wed=[]
+golf=[]
+dinner=[]
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -24,33 +28,37 @@ class MyHTMLParser(HTMLParser):
 	    global count
 	    global st
 	    global days
+	    global tues
+	    global wed
+	    global golf
+	    global dinner
 	    exit=0
 	    for i in attr:
 		if i == "checked" and count ==0:
 			#print "tue"
 			#days.append("tuesday")
-			days.append("yes")
+			tues.append("1")
 			count=1
 			exit=1
 			st=1
 		elif i == "checked" and count ==1 and exit==0:
 			#print "wed"
 			#days.append("wednesday")
-			days.append("yes")
+			wed.append("1")
 			count=2
 			exit=1
 			st=1
 		elif i == "checked" and count ==2 and exit==0:
 			#print "golf"
 			#days.append("golf")
-			days.append("yes")
+			golf.append("1")
 			count=3
 			exit=1
 			st=1
 		elif i == "checked" and count ==3 and exit==0:
 			#print "dinner"
 			#days.append("dinner")
-			days.append("yes")
+			dinner.append("1")
 			count=4
 			exit=1
 			st=1
@@ -127,6 +135,7 @@ soup=BeautifulSoup(content,'html5lib')
 #print soup
 writer1 = csv.writer(open("comp"+".csv", 'wb'))
 writer1.writerow(["Companies","Tuesday","Wednesday","Golf","Dinner"])
+ccc=0
 for entry in soup.find_all('td'):
 	s=BeautifulSoup(str(entry))
 	#print s
@@ -139,6 +148,7 @@ for entry in soup.find_all('td'):
 		#print s.a.contents[0]
 		if str(s.a.contents[0]) != "?":
 			comp=s.a.contents[0]
+			ccc=ccc+1
 		count =0
 		this=1
 		#print days
@@ -159,9 +169,16 @@ for entry in soup.find_all('td'):
 		#print "!!!!!!!!!!!!!!"
 		#print str(s)
 		#print "@@@@@@@@@@@@@"
-		days.append("no")
+		#days.append("no")
 		count =count +1
-
+		if count==1:
+			tues.append('0')
+		elif count==2:
+			wed.append('0')
+		elif count==3:
+			golf.append('0')
+		elif count==4:
+			dinner.append('0')
 #print sys.getsizeof(soup)
-
+print ccc
 #"""
