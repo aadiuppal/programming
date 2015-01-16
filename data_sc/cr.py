@@ -156,6 +156,10 @@ for entry in soup.find_all('td'):
 		if str(s.a.contents[0]) =="?":
 			#print days
 			days.insert(0,comp)
+			days.insert(1,tues)
+			days.insert(2,wed)
+			days.insert(3,golf)
+			days.insert(4,dinner)
 	                writer1.writerow(days)
 			days=[]
 			st =1
