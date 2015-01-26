@@ -67,23 +67,6 @@ class MyHTMLParser(HTMLParser):
 				st=1
 		   # print days
 	           # print "     attr:", attr
-    #def handle_endtag(self, tag):
-      # print "End tag  :", tag
-#    def handle_data(self, data):
-#       print "Data     :", data
-    #def handle_comment(self, data):
-       #print "Comment  :", data
-#    def handle_entityref(self, name):
-#        c = unichr(name2codepoint[name])
-#        print "Named ent:", c
-    def handle_charref(self, name):
-        if name.startswith('x'):
-            c = unichr(int(name[1:], 16))
-        else:
-            c = unichr(int(name))
-        #print "Num ent  :", c
-    #def handle_decl(self, data):
-        #print "Decl     :", data
 ####################  HTML Parser class ends here #################
 
 parser=MyHTMLParser()
@@ -121,7 +104,7 @@ emp_control = br.form.find_control("ctl00$ctl00$ctl00$MasterMain$Content$Content
 day_control.value = ["A"]
 maj_control.value = ["7"]   ##7=computer engg     8= computer science     9=electrical engg
 deg_control.value = ["M"]  ##M=masters
-emp_control.value = ["C"] ##IC=intern /co-op
+emp_control.value = ["IC"] ##IC=intern /co-op
 #print control
 #br[control.name] = ["Tuesday"]  # equivalent and more normal
 response = br.submit()
