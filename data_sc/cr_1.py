@@ -15,8 +15,8 @@ class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
 	for attr in attrs:
 	    global count
-	    global st
-	    global days
+	    global location
+	    #global days
 	    global tues
 	    global wed
 	    global golf
@@ -29,28 +29,28 @@ class MyHTMLParser(HTMLParser):
 			tues=1
 			count=1
 			exit=1
-			st=1
+			loc=1
 		elif i == "checked" and count ==1 and exit==0:
 			#print "wed"
 			#days.append("wednesday")
 			wed=1
 			count=2
 			exit=1
-			st=1
+			loc=1
 		elif i == "checked" and count ==2 and exit==0:
 			#print "golf"
 			#days.append("golf")
 			golf=1
 			count=3
 			exit=1
-			st=1
+			loc=1
 		elif i == "checked" and count ==3 and exit==0:
 			#print "dinner"
 			#days.append("dinner")
 			dinner=1
 			count=4
 			exit=1
-			st=1
+			loc=1
 	   # print days
 
 ####################  HTML Parser class ends here #################
@@ -110,20 +110,20 @@ num_companies=0
 for entry in soup.find_all('td'):
 	s=BeautifulSoup(str(entry))
 	global count
-	global st
+	global location
 	global days
         global tues
 	global wed
 	global golf
 	global dinner
-	st=0
-	this=0
+	loc=0
+	comp_name=0
 	if s.a:
 		if str(s.a['href']) != "/images/careerfair/ReedMap.jpg":
 			comp=s.a.contents[0]
 			num_companies=num_companies+1
 		count =0
-		this=1
+		comp_name=1
 		if str(s.a['href']) =="/images/careerfair/ReedMap.jpg":
 			days.insert(0,comp)
 			days.insert(1,tues)
@@ -133,10 +133,10 @@ for entry in soup.find_all('td'):
 			days.insert(5,s.a.contents[0])
 	                writer1.writerow(days)
 			days=[]
-			st =1
+			loc=1
 	if parser.feed(str(s)):
 		parser.feed(str(s))
-	elif this==0 and st==0:
+	elif comp_name==0 and location==0:
 		count =count +1
 		if count==1:
 			tues=0
