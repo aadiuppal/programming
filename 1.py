@@ -7,7 +7,7 @@ def push_note(note_title,note_body):
 	url_check="https://api.pushbullet.com/v2/users/me"
 	url_pushes="https://api.pushbullet.com/v2/pushes"
 	url_devices="https://api.pushbullet.com/v2/devices"
-	access_token="v1rcbnSMDylNrUSV0hYYussUh6j0wP2MqrujCwH3aF68O"
+
 
 
 
