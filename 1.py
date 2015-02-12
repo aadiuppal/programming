@@ -7,7 +7,7 @@ def push_note(note_title,note_body):
 	url_check="https://api.pushbullet.com/v2/users/me"
 	url_pushes="https://api.pushbullet.com/v2/pushes"
 	url_devices="https://api.pushbullet.com/v2/devices"
-
+	access_token="##################################"
 
 
 
@@ -15,13 +15,16 @@ def push_note(note_title,note_body):
 
 	#note_title="NOte title"
 	#note_body="NoTe BoDy"
-	push_header="'Content-Type: application/json' --data-binary "
-	push_details='{"type":"note","title": "'+note_title+'","body": "'+note_body+'"}'
-	push_command="curl -u "+access_token+": "+"-X POST "+url_pushes+" --header "+push_header+" '"+push_details+"'"+" -k"
+	try:
+		push_header="'Content-Type: application/json' --data-binary "
+		push_details='{"type":"note","title": "'+note_title+'","body": "'+note_body+'"}'
+		push_command="curl -u "+access_token+": "+"-X POST "+url_pushes+" --header "+push_header+" '"+push_details+"'"+" -k"
       
-	devices_command="curl -u "+access_token+": "+"-X GET "+url_devices+" -k"
+		devices_command="curl -u "+access_token+": "+"-X GET "+url_devices+" -k"
 
-	os.system(push_command)
+		os.system(push_command)
+	except:
+		pass
 
 
 algo_cs629_url="http://faculty.cs.tamu.edu/ajiang/629.html"
@@ -34,10 +37,9 @@ while True:
 	#print body 
 	h = HTMLParser.HTMLParser()
 	body= h.unescape(new_page)
-
 	if old_page and new_page != old_page:
-		body=new_page.rsplit(old_page)
-		body=h.unescape(body)
-		push_note("algo hw posted",body)
+		#body=str(new_page).rsplit(str(old_page))
+		#body=h.unescape(body)
+		push_note("Changes on Algo 629 page","Possibly next HW posted")
 	old_page=new_page
 
