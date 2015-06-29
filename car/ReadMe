@@ -1,0 +1,5 @@
+Get a list of all cars on autotrader.com
+
+Modify the link
+and run the script to get a csv generated with fields
+year   make   model   price   mileage   link_to_car
