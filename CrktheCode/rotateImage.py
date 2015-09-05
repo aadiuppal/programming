@@ -9,12 +9,13 @@ def roatatImage(matrix):
     i_end=n-1
     j=0
     j_end=n-1
-    temp=matrix[0]
+    temp=matrix[0][:-1]
     temp_new=[]
     while i<i_end and j<j_end:#condition:
         #check val at prev iter
         #for 1st iter temp is already assigned
-        for i_iter in range(i,i_end+1):
+        temp=matrix[i][j:j_end]
+        for i_iter in range(i,i_end):
             temp_new.append(matrix[i_iter][j_end])
             matrix[i_iter][j_end]=temp[i_iter-i]
         #now reload temp
@@ -37,7 +38,7 @@ def roatatImage(matrix):
         i+=1
         j_end-=1
         i_end-=1
-        temp=temp_new[1:]
+        temp=temp_new[1:-1]
         temp_new=[]
     return matrix
 
@@ -46,5 +47,5 @@ matrix=[[1,2,3,4],
         [9,10,11,12],
         [13,14,15,16]]
 m=roatatImage(matrix)
-for i in m:
-    print i
+for i in range(len(m)):
+    print m[i]
