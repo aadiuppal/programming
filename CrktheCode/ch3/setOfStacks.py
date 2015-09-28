@@ -50,7 +50,8 @@ def shifter(index,set_stack):
         else:
             set_stack=set_stack[:-1]+[set_stack[-1][:-1]]
     else:
-        set_stack.stack_arr[st_index][:el_index]+set_stack.stack_arr[st_index][el_index+1:]
+        set_stack.stack_arr[st_index]=set_stack.stack_arr[st_index][:el_index]+set_stack.stack_arr[st_index][el_index+1:]+[set_stack.stack_arr[st_index+1][0]]
+        while j < set_stack
 s1=setOfStacks()
 s1.push(1)
 s1.push(2)
