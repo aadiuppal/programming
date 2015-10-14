@@ -15,7 +15,8 @@ class Nqueens:
             if self.check(row,c,curr):
                 curr.append([row,c])
                 if len(curr) == len(self.rows):
-                    result.append(copy.deepcopy(curr))
+                    #result.append(copy.deepcopy(curr))
+                    result += [tuple(curr)]
                 else:
                     self.solution(row+1,curr,result)
                 curr.pop()
