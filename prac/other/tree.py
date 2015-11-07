@@ -46,3 +46,13 @@ class Tree:
             if temp.right:
                 stack.append(temp.right)
         return None
+    def preorder(self,root):
+        if not root:
+            return []
+        l = []
+        r = []
+        if root.left:
+            l = self.preorder(root.left)
+        if root.left:
+            r = self.preorder(root.right)
+        return [root.val]+l+r
