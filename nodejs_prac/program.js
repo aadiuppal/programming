@@ -64,14 +64,63 @@
 //});
 
 //8
-var http = require('http');
-var bl = require('bl');
-http.get(process.argv[2],function callback(res){
-        res.setEncoding('utf8');
-        res.pipe(bl(function(err,data){
-          console.log(data.toString().length);
-          console.log(data.toString());
-        }));
-});
+//var http = require('http');
+//var bl = require('bl');
+//http.get(process.argv[2],function callback(res){
+//        res.setEncoding('utf8');
+//        res.pipe(bl(function(err,data){
+//          console.log(data.toString().length);
+//          console.log(data.toString());
+//        }));
+//});
 
 //9
+//var http = require('http');
+//var bl = require('bl');
+//var count = 2;
+//var arr = [];
+//function get_data(url){
+//  var dat = "";
+//  var req = http.get(url,function (res){
+//    res.setEncoding('utf8');
+//    res.on('data',function (d) {
+//      dat += d;
+//    });
+//    res.on('end',function () {
+//      arr.push(dat);
+//      if (count < 4){
+//        count += 1;
+//        get_data(process.argv[count]);
+//      }else{
+//        for (var i = 0 ;i< arr.length;i++){
+//          console.log(arr[i]);
+//        }
+//      }
+//    });
+//  res.on('error',function (e) {
+//   console.log(e);
+//  });
+//  });
+//
+//}
+//get_data(process.argv[2]);
+
+//10
+var net = require('net');
+var server = net.createServer( function(c){
+  var d = "";
+  var date = new Date();
+  d +=   date.getFullYear()+"-";
+  d +=   ("0"+(date.getMonth()+1)).slice(-2)+"-";
+  d +=   ("0"+date.getDate()).slice(-2)+" ";
+  d +=   ("0"+date.getHours()).slice(-2)+":";
+  d +=   ("0"+date.getMinutes()).slice(-2);
+  c.write(d+"\n");
+  c.end();
+  c.on('end',function(){
+    console.log('end');
+   });
+});
+server.listen(process.argv[2],function(){
+  console.log("listen");
+});
