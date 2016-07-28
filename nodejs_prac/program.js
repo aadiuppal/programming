@@ -135,9 +135,41 @@
 //server.listen(process.argv[2]);
 
 //12
+//var http = require('http');
+//var map = require('through2-map');
+//var server = http.createServer(function (req,res){
+//  req.pipe(map(function (chunk){return chunk.toString().toUpperCase()})).pipe(res);
+//});
+//server.listen(process.argv[2]);
+
+//13
 var http = require('http');
-var map = require('through2-map');
+var url = require('url');
+var Readable = require('stream').Readable;
 var server = http.createServer(function (req,res){
-  req.pipe(map(function (chunk){return chunk.toString().toUpperCase()})).pipe(res);
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  var url_dat = url.parse(req.url,true);
+  if (url_dat['pathname'] == '/api/parsetime'){
+    var t = url_dat['query']['iso'];
+    var d = new Date(t);
+    var hr = d.getHours();
+    var min = d.getMinutes();
+    var sec = d.getSeconds();
+    var r = {}
+    r["hour"] = hr;
+    r["minute"] = min;
+    r["second"] = sec;
+    //console.log(r);
+    res.write(JSON.stringify(r),{encoding:'utf8'});
+    res.end();
+  }
+  if (url_dat['pathname'] == '/api/unixtime'){
+    var t = url_dat['query']['iso'];
+    var d = new Date(t);
+    var r = {};
+    r['unixtime'] = d.getTime();
+    res.write(JSON.stringify(r),{encoding:'utf8'});
+    res.end();
+  }
 });
 server.listen(process.argv[2]);
