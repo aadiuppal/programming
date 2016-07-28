@@ -106,21 +106,30 @@
 //get_data(process.argv[2]);
 
 //10
-var net = require('net');
-var server = net.createServer( function(c){
-  var d = "";
-  var date = new Date();
-  d +=   date.getFullYear()+"-";
-  d +=   ("0"+(date.getMonth()+1)).slice(-2)+"-";
-  d +=   ("0"+date.getDate()).slice(-2)+" ";
-  d +=   ("0"+date.getHours()).slice(-2)+":";
-  d +=   ("0"+date.getMinutes()).slice(-2);
-  c.write(d+"\n");
-  c.end();
-  c.on('end',function(){
-    console.log('end');
-   });
+//var net = require('net');
+//var server = net.createServer( function(c){
+//  var d = "";
+//  var date = new Date();
+//  d +=   date.getFullYear()+"-";
+//  d +=   ("0"+(date.getMonth()+1)).slice(-2)+"-";
+//  d +=   ("0"+date.getDate()).slice(-2)+" ";
+//  d +=   ("0"+date.getHours()).slice(-2)+":";
+//  d +=   ("0"+date.getMinutes()).slice(-2);
+//  c.write(d+"\n");
+//  c.end();
+//  c.on('end',function(){
+//    console.log('end');
+//   });
+//});
+//server.listen(process.argv[2],function(){
+//  console.log("listen");
+//});
+
+//11
+var http = require('http');
+var fs = require('fs');
+var src = fs.createReadStream(process.argv[3],{encoding:'utf8'});
+var server = http.createServer(function (request,response){
+  src.pipe(response);
 });
-server.listen(process.argv[2],function(){
-  console.log("listen");
-});
+server.listen(process.argv[2]);
