@@ -126,10 +126,18 @@
 //});
 
 //11
+//var http = require('http');
+//var fs = require('fs');
+//var src = fs.createReadStream(process.argv[3],{encoding:'utf8'});
+//var server = http.createServer(function (request,response){
+//  src.pipe(response);
+//});
+//server.listen(process.argv[2]);
+
+//12
 var http = require('http');
-var fs = require('fs');
-var src = fs.createReadStream(process.argv[3],{encoding:'utf8'});
-var server = http.createServer(function (request,response){
-  src.pipe(response);
+var map = require('through2-map');
+var server = http.createServer(function (req,res){
+  req.pipe(map(function (chunk){return chunk.toString().toUpperCase()})).pipe(res);
 });
 server.listen(process.argv[2]);
